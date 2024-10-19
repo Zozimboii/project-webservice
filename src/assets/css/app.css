@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.sidebar {
+  position: relative;
+  width: 15%;
+  height: 100vh;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 24px;
+
+}
+
+.sidebar .head {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f6f6f6;
+
+}
+
+.user-details .title,
+.menu .title {
+  font-size: 11px;
+  font-weight: 500;
+  color: #757575;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.nav {
+  flex: 1;
+}
+
+.menu:not(:last-child) {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.user-details .name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.menu ul {
+  padding: 0;
+}
+
+.menu ul li {
+  list-style: none;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.menu ul .rout {
+  text-decoration: none;
+}
+
+.menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #757575;
+  text-decoration: none;
+
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.menu ul li:hover a {
+  color: #000;
+  background-color: #f6f6f6;
+}
+
+.menu ul li .icon {
+  font-size: 20px;
+}
+
+.menu ul li .text {
+  flex: 1;
+}
+
+.menu ul li .arrow {
+  font-size: 15px;
+}
+
+
+
+.menu .sub-menu li a {
+  padding: 10px 8px;
+  font-size: 12px;
+}
+
+.nav-top {
+  width: 100%;
+  height: 100vh;
+
+}
+
+.nav-top .list {
+  color: #f6f6f6;
+  font-size: 24px;
+}
+
+.nav-top .inside-top {
+  height: 6vh;
+
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 10px;
+  width: 100%;
+  background-color: #0021db8a;
+}
+
+.toggle-menu {
+
+  width: 25px;
+  cursor: pointer;
+}
+
+.search-top {
+  width: 100%;
+  display: flex;
+}
+
+.search-inside {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid white; */
+  color: #096340;
+  margin: 0 0 0 130px;
+}
+
+/* 
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-left: 40px;
+  
+}
+
+.search-form .text-search {
+  width: 400px;
+}
+
+.search-form button {
+  margin-left: 15px;
+} */
+
+.logo {
+  width: 150;
+  /* border: 1px solid white; */
+  padding: 0 15px 0 15px;
+}
+
+.logo-img {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* border: 1px solid white; */
+}
+
+.data-main {
+  height: 94vh;
+  display: flex;
+  /* padding: 20px; */
+  background-image: url(../background.png);
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  /* background-attachment: fixed; */
+  background-size: cover;
+  /* opacity: 0.9; */
+}
+
+
+.logo-img img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+
+}
+
+.cart {
+  width: 10%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid white; */
+}
+
+.cart ul {
+  padding: 0;
+  margin: 0;
+}
+.cart ul li {
+  list-style: none;
+
+}
+
+.cart ul .rout {
+  text-decoration: none;
+}
+
+.cart ul li a {
+  display: flex;
+  align-items: center;
+  
+  gap: 10px;
+  /* border: 1px solid white; */
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  /* padding: 12px 8px; */
+  border-radius: 8px;
+  transition: all 0.5s;
+}
+
+.cart ul li:hover a {
+  color: #000;
+  transition: all 0.5s;
+}
+/* .cart .rout {
+  width: 70%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  
+} */
+
+/* .cart .cart-deco{
+  list-style: none;
+  margin-bottom: 5px;
+  position: relative;
+  transition: all 0.5s;
+  
+} */
+/* .cart .cart-deco:hover{
+  
+  color: #000;
+  transition: all 0.5s;
+  
+} */
+/* .cart a {
+  margin-left: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  transition: all 0.5s;
+} */
+
+.cart-img {
+  font-size: 25px;
+  
+}

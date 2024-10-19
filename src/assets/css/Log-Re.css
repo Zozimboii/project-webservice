@@ -1,0 +1,65 @@
+.register-container{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px 80px 20px;
+    
+    
+}
+.register-container form{
+    padding: 20px;
+    border-radius: 15px;
+    width: 35%;
+    background: #FF93B3;
+    /* border: 2px solid white; */
+    text-align: center;
+}
+.register-container form h3{
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: white;
+}
+.register-container form input,
+.register-container form select{
+    width: 75%;
+    
+    padding: 10px 15px;
+    font-size: 17px;
+    margin: 8px 0;
+    background: #eee;
+    border-radius:5px ;
+    border: 4px solid rgb(184, 45, 45);
+}
+
+.register-container form select option{
+    background: #fff;
+}
+.register-container form .register-btn{
+    background: #E7D2E5;
+    color: #EE1C43;
+    text-transform: capitalize;
+    font-size: 20px;
+    cursor: pointer;
+}
+.register-container form .register-btn:hover{
+    background: #EE1C43;
+    color: #fff;
+    
+}
+.register-container form p{
+    margin-top: 10px;
+    font-size: 20px;
+    color: white;
+}
+.register-container form p a{
+   
+    color: #EE1C43;
+}
+
+
+
+
+
