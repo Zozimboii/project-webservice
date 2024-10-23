@@ -7,9 +7,7 @@ import TheMain from "@/components/TheMain.vue";
 import TheRegister from "@/components/TheRegister.vue";
 import AdminPage from "@/components/AdminPage.vue";
 import UserPage from "@/components/UserPage.vue";
-
-
-
+import ManageProduct from "@/components/ManageProduct.vue";
 
 const routes = [
   {
@@ -47,16 +45,16 @@ const routes = [
     path:"/user",
     component: UserPage,
   },
+  {
+    name:'ManageProduct',
+    path:"/manageproduct",
+    component: ManageProduct
+  }
   
 ];
 
-const router = Router();
-export default router;
-function Router() {
-    const router = new createRouter({
-        history: createWebHistory(),
-        routes,
-    });
-    return router;
-}
-  
+const router = createRouter({
+  history:createWebHistory(process.env.BASE_URL),
+  routes
+})
+export default router  

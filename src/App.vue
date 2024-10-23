@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-
-
     <div class="sidebar" v-show="showSide">
       <div class="head">
         <!-- img user -->
