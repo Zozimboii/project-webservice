@@ -1,0 +1,78 @@
+.add-menu-admin{
+    background-color: #F3F3E0;
+    width: 100%;
+    /* border: 1px solid white; */
+}
+.add-menu-admin .menu-text{
+    /* border: 1px solid white; */
+    color: #133E87;
+}
+.add-menu-admin  p {
+    color: #243642;
+    /* border: 1px solid white; */
+    /* padding-left: 100px; */
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+.add-menu-admin form label{
+    font-size: 20px;
+    /* display: block; */
+    text-transform: capitalize;
+    /* border: 1px solid white; */
+    width: 20%;
+   margin-right: 20px;
+   color: #E2F1E7;
+
+}
+
+.add-menu-admin form .box-name1{
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.add-menu-admin form {
+    /* border: 1px solid white; */
+    padding: 20px;
+    border-radius: 15px;
+    width: 35%;
+    background: #608BC1;
+    align-items: center;
+    /* border: 2px solid white; */
+    text-align: center;
+}
+.add-menu-admin form input {
+    width: 75%;
+    padding: 10px 15px;
+    font-size: 17px;
+    margin: 8px 0;
+    background: #eee;
+    border-radius:5px ;
+    border: 4px solid #025483;
+}
+
+.add-menu-admin .box-description {
+    /* border: 1px solid rgb(105, 11, 11); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:70vh ;
+}
+
+.add-menu-admin form .add-product-btn {
+    border: 4px solid #eec372;
+    background-color:#F4F6FF ;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(39, 107, 146);
+    transition: all 0.5s;
+}
+
+.add-menu-admin form .add-product-btn:hover {
+    /* background-color: #CBDCEB; */
+    background-color: #eec372;
+    color: white;
+    transition: all 0.5s;
+    /* border: 4px solid #ffffff; */
+}

@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <h5 class="text-success" style="text-align: center;">Product List</h5>
+  
+  <div class="admin-container">
+    <h5>Product List</h5>
+    <div class="add-btn">
     <router-link to="/admin">
-      <button class="btn btn-success">Add product</button>
+      <button class="admin-btn">Add product</button>
     </router-link>
-    <table border="1" style="width: 100%; text-align: center;">
+  </div>
+  <div class="admin-form">
+    <table>
       <thead>
         <tr>
-          <th>Food ID</th>
-          <th>Food Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Category</th>
+          <th class="th1">Food ID</th>
+          <th class="th2">Food Name</th>
+          <th class="th3">Description</th>
+          <th class="th4">Price</th>
+          <th class="th5">Category</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +28,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>  
 </template>
 
@@ -38,7 +43,7 @@ export default {
       }
     },
     mounted(){
-      axios.get('http://127.0.0.1:3000/products')
+      axios.get('http://localhost:3000/products')
       .then(res=>{
         this.foods = res.data
       })

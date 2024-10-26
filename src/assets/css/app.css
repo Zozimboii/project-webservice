@@ -149,6 +149,7 @@ body {
 .search-top {
   width: 100%;
   display: flex;
+  
 }
 
 .search-inside {
@@ -159,6 +160,7 @@ body {
   /* border: 1px solid white; */
   color: #096340;
   margin: 0 0 0 130px;
+  padding-right: 28px;
 }
 
 /* 
@@ -180,23 +182,27 @@ body {
 } */
 
 .logo {
-  width: 150;
+  
   /* border: 1px solid white; */
-  padding: 0 15px 0 15px;
+  margin: 10px;
+  /* padding: 0 50px 0 25px; */
+  
 }
 
 .logo-img {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  padding-left: 0px;
   /* border: 1px solid white; */
 }
 
 .data-main {
+  
   height: 94vh;
   display: flex;
   /* padding: 20px; */
-  /* background-image: url(../background.png); */
+  background-image: url(../background.png);
   /* background-repeat: no-repeat; */
   background-position: center;
   /* background-attachment: fixed; */

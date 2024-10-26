@@ -11,6 +11,7 @@
     "axios": "^1.7.7",
     "bootstrap-icons": "^1.11.3",
     "core-js": "^3.8.3",
+    "mitt": "^3.0.1",
     "node-modules": "^1.0.1",
     "vue": "^3.2.13",
     "vue-router": "^4.4.5"

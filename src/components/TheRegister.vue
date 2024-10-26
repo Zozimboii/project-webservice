@@ -1,12 +1,19 @@
 <template>
-  <div class="register-container">
+  <div class="register-user-container">
     <form @submit.prevent="handleSubmit()">
         <h3>register now</h3>
-        <input v-model="memName" type="text" id="memName" required placeholder="Enter your name">
-        <input v-model="memEmail" type="email" id="memEmail" placeholder="Enter your email">
-        <input v-model="password" type="password" id="password" required placeholder="Enter your password">
-        <p v-if="errorMessage" style="color:red;">{{ errorMessage }}</p>
-        <input v-model="confirmPassword" type="password" name="cpassword" required placeholder="Confirm your password">
+        <div class="text-label"><label for="memName">Username</label></div>
+        <div class="inside-box">
+        
+          <input v-model="memName" type="text" id="memName" required placeholder="Enter your name"></div>
+          <div class="text-label"><label for="memName">Email</label></div>
+        <div class="inside-box"><input v-model="memEmail" type="email" id="memEmail" placeholder="Enter your email"></div>
+        <div class="text-label"><label for="memName">Password</label></div>
+        <div class="inside-box"><input v-model="password" type="password" id="password" required placeholder="Enter your password">
+        <p v-if="errorMessage" style="color:red;">{{ errorMessage }}</p></div>
+        <div class="text-label"><label for="memName">Confirm Password</label></div>
+        <div class="inside-box"> <input v-model="confirmPassword" type="password" name="cpassword" required placeholder="Confirm your password"></div>
+        
         <!-- <select name="user_type">
             <option value="user">user</option>
             <option value="user">admin</option>
@@ -46,7 +53,7 @@ export default {
         password:this.password
       }
       try{
-        const response = await axios.post(`http://127.0.0.1:3000/members`,members)
+        const response = await axios.post(`http://localhost:3000/members`,members)
         this.backendMessage = response.data.messageregister;
         this.errorMessage = null;
         if(this.backendMessage === 'success'){
