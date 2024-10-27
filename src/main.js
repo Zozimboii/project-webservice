@@ -8,4 +8,5 @@ import './assets/css/Log-Re.css'
 import './assets/css/AUPage.css'
 import './assets/css/addadmin.css'
 import './assets/css/setting.css'
+import './assets/css/edit.css'
 createApp(App).use(router).mount('#app')

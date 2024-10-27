@@ -8,6 +8,8 @@ import TheRegister from "@/components/TheRegister.vue";
 import AdminPage from "@/components/AdminPage.vue";
 import UserPage from "@/components/UserPage.vue";
 import ManageProduct from "@/components/ManageProduct.vue";
+import EditPage from "@/components/EditPage.vue";
+import EditImg from "@/components/EditImg.vue";
 
 
 const routes = [
@@ -52,8 +54,17 @@ const routes = [
     path:"/manageproduct",
     component: ManageProduct,
     meta: { requiresAuth: true, role: 'admin'}
+  },
+  {
+    name:"Edit",
+    path:"/edit/:id",
+    component: EditPage,
+  },
+  {
+    name:"EditImg",
+    path:"/img",
+    component: EditImg,
   }
-  
 ];
 
 const router = createRouter({

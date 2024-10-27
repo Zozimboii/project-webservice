@@ -67,9 +67,9 @@
       
       <div class="menu" v-else>
          <!-- <div class="menu" ></div> -->
-
+      <div class="menu-set">
         <p class="title">Setting</p>
-
+          
         <ul>
           <router-link to="/setting" class="rout">
             <li>
@@ -81,9 +81,11 @@
           </router-link>
         </ul>
       </div>
+      </div>
+      <div class="menu-acc">
       <div class="menu">
         <p class="title">Account</p>
-
+        
         <ul v-if="memName === null">
           <router-link to="/login" class="rout">
             <li>
@@ -104,6 +106,7 @@
           </li>
           <!-- </router-link> -->
         </ul>
+        </div>
       </div>
     </div>
     <div class="nav-top">

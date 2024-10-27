@@ -1,78 +1,126 @@
-.admin-container{
+.admin-container {
     /* border: 1px solid black; */
     width: 100%;
     background-color: #F3F3E0;
+    /* min-height: 150vh; */
     /* margin: 10px 10px 0 10px; */
 }
 
-h5{
+.text-product {
     /* border: 1px solid black; */
     text-align: center;
-    color:#133E87;
+    color: #133E87;
     margin-top: 20px;
     font-size: 50px;
 }
-.admin-form{
+
+.admin-form {
     /* border: 1px solid white; */
-    
+
     justify-content: center;
     display: flex;
-    
+
     margin-top: 20px;
-    
+
 }
-table  {
+
+.admin-table {
     border: 1px solid white;
     text-align: center;
     margin: 10px 20px 10px 20px;
-    width:99%;
-    
-    
+    width: 99%;
+
+
     color: white;
-    
+
 }
 
-table thead {
+.admin-table .admin-head {
     font-size: 20px;
     /* background-color: aqua; */
+
 }
-table thead th{
+
+.admin-table .admin-head th {
     /* border: 1px solid rgb(255, 255, 255); */
-    background-color:  #133E87;
-    padding: 10px;
+    background-color: #133E87;
+    padding: 20px;
 }
-table thead .th1,table thead .th2,table thead .th3,table thead .th4,table thead .th5{
+
+.admin-table .admin-head .th0,
+.admin-table .admin-head .th1,
+.admin-table .admin-head .th2,
+.admin-table .admin-head .th3,
+.admin-table .admin-head .th4,
+.admin-table .admin-head .th5,
+.admin-table .admin-head .th6 {
+    color: white;
+    /* border: 1px solid rgb(255, 255, 255); */
+    border-right: 1px solid white;
+
+}
+
+.admin-table .admin-head .th0 {
+    width: 10%;
+}
+
+.admin-table .admin-head .th1 {
     width: 5%;
-    /* border: 1px solid rgb(255, 255, 255); */
-    border-right: 1px solid white ;
-    
 }
-table thead .th2{
-    width: 35%;
-    /* border: 1px solid rgb(255, 255, 255); */
-}
-table thead .th3{
-    width: 45%;
-    /* border: 1px solid rgb(255, 255, 255); */
-}
-table thead .th4{
-    width: 5%;
-    /* border: 1px solid rgb(255, 255, 255); */
-}
-table thead .th5{
+
+.admin-table .admin-head .th2 {
     width: 10%;
     /* border: 1px solid rgb(255, 255, 255); */
 }
-table td{
-    /* border: 1px solid rgb(163, 19, 19); */
-    border-right: 1px solid white;
-    background-color: #CBDCEB;
-    padding: 10px;
-    color:#000000;
-    
+
+.admin-table .admin-head .th3 {
+    width: 20%;
+    /* border: 1px solid rgb(255, 255, 255); */
 }
 
-.admin-btn{
+.admin-table .admin-head .th4 {
+    width: 5%;
+    /* border: 1px solid rgb(255, 255, 255); */
+}
+
+.admin-table .admin-head .th5 {
+    width: 5%;
+    /* border: 1px solid rgb(255, 255, 255); */
+}
+
+.admin-table .admin-head .th6 {
+    width: 5%;
+    /* border: 1px solid rgb(0, 0, 0); */
+
+}
+
+.admin-table .admin-tr {
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.admin-table .admin-tr {
+    /* border: 1px solid rgb(163, 19, 19); */
+    /* border-right: 1px solid white; */
+    background-color: #CBDCEB;
+    padding: 10px;
+    color: #000000;
+
+}
+tbody .admin-tr .edit-del {
+    /* border: 1px solid rgb(163, 19, 19);  */
+    /* display: inline-flex; */
+    /* justify-content: space-between; */
+    margin: 10px;
+}
+tbody .admin-tr .td0,
+tbody .admin-tr .td1,
+tbody .admin-tr .td2,
+tbody .admin-tr .td3,
+tbody .admin-tr .td4,
+tbody .admin-tr .td5{
+    padding: 10px;
+}
+.admin-btn {
     width: 180px;
     height: 50px;
     font-size: 25px;
@@ -83,19 +131,19 @@ table td{
     color: #133E87;
     transition: all 0.6s;
     border-radius: 5px;
-    background-color:#CBDCEB ;
+    background-color: #CBDCEB;
 }
 
 .admin-btn:hover {
     background-color: #87A2FF;
     transition: all 0.6s;
     color: white;
-   
+
 }
 
 .add-btn {
     /* border: 1px solid black; */
-    
+
     display: flex;
     justify-content: flex-end;
     padding-right: 25px;
