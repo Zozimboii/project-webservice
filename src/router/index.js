@@ -9,6 +9,7 @@ import AdminPage from "@/components/AdminPage.vue";
 import UserPage from "@/components/UserPage.vue";
 import ManageProduct from "@/components/ManageProduct.vue";
 
+
 const routes = [
   {
     name: "Main",
@@ -39,6 +40,7 @@ const routes = [
     name:"Admin",
     path:"/admin",
     component: AdminPage,
+    meta: { requiresAuth: true, role: 'admin'}
   },
   {
     name:"User",
@@ -48,7 +50,8 @@ const routes = [
   {
     name:'ManageProduct',
     path:"/manageproduct",
-    component: ManageProduct
+    component: ManageProduct,
+    meta: { requiresAuth: true, role: 'admin'}
   }
   
 ];
@@ -57,4 +60,18 @@ const router = createRouter({
   history:createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next)=>{
+  const isAuthenticated = !!sessionStorage.getItem('userRole')
+  const userRole = sessionStorage.getItem('userRole')
+
+  if(to.meta.requiresAuth && !isAuthenticated){
+    next({ path: '/login'})
+  }else if (to.meta.role && userRole !== to.meta.role){
+    next({ path: '/homepage'})
+  }else{
+    next();
+  }
+})
+
 export default router  

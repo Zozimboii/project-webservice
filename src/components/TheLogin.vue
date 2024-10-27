@@ -58,15 +58,17 @@ export default {
           const role = response.data.role
           await this.chkSession()
           EventBus.emit('loginok')
+
+          sessionStorage.setItem('userRole',role)
           
           if(role === 'admin'){
             setTimeout(()=>{
               this.$router.push('/manageproduct');
-            },1500)
+            },500)
           }else{
             setTimeout(() => {
             this.$router.push('/homepage');
-          },1500)
+          },500)
           }
         }
       }

@@ -59,7 +59,7 @@
             </router-link>
           </ul>
         </div>
-        <div class="menu" ></div>
+        <!-- <div class="menu" ></div> -->
       </div>
       <div class="menu" v-if="memName === null">
         
@@ -67,6 +67,7 @@
       
       <div class="menu" v-else>
          <!-- <div class="menu" ></div> -->
+
         <p class="title">Setting</p>
 
         <ul>
