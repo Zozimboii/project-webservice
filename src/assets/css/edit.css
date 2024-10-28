@@ -31,6 +31,7 @@
 
 }
 
+
 .edit-textname .t1 {
     color: rgb(58, 136, 182);
     border-bottom: 2px solid rgb(58, 136, 182);
@@ -39,7 +40,9 @@
 .edit-textname .t2 {
     color: white;
     border-bottom: 2px solid #f6f6f6;
+    
 }
+
 
 .edit-textname h5 {
     /* display: flex; */
@@ -59,46 +62,50 @@
     background-color: rgb(121, 191, 219);
     margin-bottom: 20px;
     border-radius: 20px;
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: center;
     gap: 20px;
     align-items: center;
     padding-top: 30px;
+    
 }
 
 .edit-form-input .edit-input {
     /* border: 1px solid rgb(128, 22, 22); */
 
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 60%;
     padding: 10px;
 }
 
-.edit-label {
-    /* border: 1px solid rgb(59, 32, 32); */
-    width: 30%;
-
-}
 
 .edit-form-input input {
     border: 4px solid blue;
     padding: 10px;
     border-radius: 10px;
     background-color: #f6f6f6;
+    text-align: center;
+}
+.edit-label {
+    /* border: 1px solid rgb(59, 32, 32); */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .edit-form-input .edit-input label {
-    /* border: 1px solid black; */
-    margin-right: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    /* border: 1px solid rgb(255, 255, 255); */
+    /* margin-right: 50px; */
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    /* align-items: center; */
     text-transform: capitalize;
-    width: 100%;
-    padding-right: 10px;
+    /* width: 100%; */
+    /* padding-right: 10px; */
     font-size: 20px;
 
 }
@@ -130,7 +137,7 @@
     /* border: 4px solid  rgb(57, 187, 100); */
 }
 
-.edit-btn-form .edit-btn .edit-cancel {
+.edit-btn-form .edit-btn .edit-cancel,.edit-btn-form .edit-btn .edit-save ,.edit-btn-form .edit-btn .edit-next  {
     border: 4px solid rgb(201, 40, 40);
     border-radius: 8px;
     transition: all 0.5s;
@@ -138,10 +145,12 @@
 
 .edit-btn-form .edit-btn .edit-save {
     border: 4px solid rgb(40, 201, 53);
-    border-radius: 8px;
-    transition: all 0.5s;
+    
 }
-
+.edit-btn-form .edit-btn .edit-next {
+    border: 4px solid rgb(68, 73, 68);
+    width: 100%;
+}
 .edit-btn-form .edit-btn .edit-cancel:hover {
     background-color: rgb(201, 40, 40);
     transition: all 0.5s;
@@ -150,6 +159,11 @@
 
 .edit-btn-form .edit-btn .edit-save:hover {
     background-color: rgb(40, 201, 53);
+    transition: all 0.5s;
+    color: white;
+}
+.edit-btn-form .edit-btn .edit-next:hover {
+    background-color: rgb(68, 73, 68);
     transition: all 0.5s;
     color: white;
 }
@@ -213,5 +227,8 @@ tbody .edit-tr .td55{
     padding: 10px;
 }
 
-
+.img-con{
+    background-color: #133E87;
+    width: 100%;
+}
 

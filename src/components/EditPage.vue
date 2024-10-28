@@ -31,11 +31,14 @@
       </table>
     </div>
     <div class="edit-form2">
-      <div class="edit-textname">
-        <h5 class="t1">Edit food</h5>
-        
+      <div class="edit-textname" v-for="food in foods" :key="food.foodId">
+        <router-link :to="{ path: '/edit/'+food.foodId}" style="text-decoration: none;">
+
+          <h5 class="t1">Edit food</h5>
+        </router-link>
+        <router-link :to="{ path: '/edit/'+food.foodId+'/img'}" style="text-decoration: none;">
         <h5 class="t2">IMG</h5>
-      
+      </router-link>
       </div>
       <div class="edit-form-input">
         <div class="edit-input">
@@ -62,14 +65,17 @@
           </div>
           <input type="text" v-model="editFood.category" />
         </div>
-        <div class="edit-btn-form">
+        <div class="edit-btn-form" v-for="food in foods" :key="food.foodId">
           <div class="edit-btn">
            
-            <button class="edit-cancel" @click="cancelEdit">Cancel</button>
+            <!-- <button class="edit-cancel" @click="cancelEdit">Cancel</button>
         
             
-              <button class="edit-save" @click="updateProduct">Save</button>
-            
+              <button class="edit-save" @click="updateProduct">Save</button> -->
+              <router-link :to="{ path: '/edit/'+food.foodId+'/img'}" style="text-decoration: none;" >
+
+                <button class="edit-next" @click="nextStep">Next</button>
+              </router-link>
           </div>
         </div>
       </div>
@@ -79,6 +85,7 @@
 
 <script>
 import axios from "axios";
+// import { EventBus } from "@/event-bus";
 export default {
   name: "EditPage",
   data() {
@@ -143,6 +150,7 @@ export default {
       };
       this.$router.push(`/manageproduct`)
     },
+    
   },
 };
 </script>

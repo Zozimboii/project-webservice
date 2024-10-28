@@ -62,7 +62,7 @@ const routes = [
   },
   {
     name:"EditImg",
-    path:"/img",
+    path:"/edit/:id/img",
     component: EditImg,
   }
 ];
