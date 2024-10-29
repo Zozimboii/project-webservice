@@ -31,15 +31,12 @@
       </table>
     </div>
     <div class="edit-form2">
+      <div class="edit-textbox">
       <div class="edit-textname" v-for="food in foods" :key="food.foodId">
-        <router-link :to="{ path: '/edit/'+food.foodId}" style="text-decoration: none;">
-
           <h5 class="t1">Edit food</h5>
-        </router-link>
-        <router-link :to="{ path: '/edit/'+food.foodId+'/img'}" style="text-decoration: none;">
-        <h5 class="t2">IMG</h5>
-      </router-link>
       </div>
+    </div>
+    <div class="edit-form2box">
       <div class="edit-form-input">
         <div class="edit-input">
           <div class="edit-label">
@@ -65,18 +62,32 @@
           </div>
           <input type="text" v-model="editFood.category" />
         </div>
+        
+        
+
+
+
+
         <div class="edit-btn-form" v-for="food in foods" :key="food.foodId">
           <div class="edit-btn">
-           
-            <!-- <button class="edit-cancel" @click="cancelEdit">Cancel</button>
-        
-            
-              <button class="edit-save" @click="updateProduct">Save</button> -->
-              <router-link :to="{ path: '/edit/'+food.foodId+'/img'}" style="text-decoration: none;" >
+            <button class="edit-cancel" @click="cancelEdit">Cancel</button>
 
-                <button class="edit-next" @click="nextStep">Next</button>
-              </router-link>
+            <button class="edit-save" @click="updateProduct">Save</button> 
+           
           </div>
+        </div>
+      </div>
+      <div class="edit-form-input2">
+        <div class="edit-input2">
+          <div class="edit-label2">
+            <label>Food Img:</label>
+          </div>
+          <input type="file" @change="handleFileUpload" id="image" required>
+          
+        </div>
+        <div v-show="showImg">
+          <img :src="editFood.previewImage" alt="Image Preview" style="width: 100px; height: 100px;">
+        </div>
         </div>
       </div>
     </div>
@@ -91,25 +102,23 @@ export default {
   data() {
     return {
       foods: [],
-      isEditFormVisible: false,
+      
+      showImg: false,
       editFood: {
         foodId: "",
         foodName: "",
         description: "",
         price: 0,
         category: "",
+        
+        image: null,
+        previewImage: null
       },
     };
   },
-  watch: {
-    foods(food) {
-      if (food.length > 0) {
-        this.openEditForm(food[0]);
-      }
-    },
-  },
   mounted() {
     this.fetchProducts(this.$route.params.id);
+   
   },
   methods: {
     fetchProducts(foodId) {
@@ -117,15 +126,30 @@ export default {
         .get(`http://localhost:3000/products/edit/${foodId}`)
         .then((res) => {
           this.foods = res.data;
+          this.editFood = { ...this.foods[0] };
+          this.editFood.previewImage = `http://localhost:3000/img_fd/${foodId}.jpg`;
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    openEditForm(food) {
-      this.editFood = { ...food };
+  
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.editFood.image = file;
+        this.editFood.previewImage = URL.createObjectURL(file);
+        this.showImg = true;
+      }
     },
+    
     updateProduct() {
+      // test อยู่
+      const formData = new FormData();
+      if (this.editFood.image) {
+        formData.append("image", this.editFood.image); 
+      }
+      // 
       axios
         .put(
           `http://localhost:3000/products/edit/${this.editFood.foodId}`,
@@ -134,7 +158,7 @@ export default {
         .then(() => {
           alert("Product updated successfully");
           this.fetchProducts(this.editFood.foodId);
-          this.$router.push(`/manageproduct`)
+          this.$router.push(`/manageproduct`);
         })
         .catch((err) => {
           console.log(err);
@@ -148,9 +172,8 @@ export default {
         price: 0,
         category: "",
       };
-      this.$router.push(`/manageproduct`)
+      this.$router.push(`/manageproduct`);
     },
-    
   },
 };
 </script>
