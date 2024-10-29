@@ -60,7 +60,7 @@
 
 <script>
 import axios from 'axios';
-
+// import { EventBus } from '@/event-bus';
 export default {
   name: 'ManageProduct',
   data() {
@@ -89,31 +89,6 @@ export default {
           console.log(err);
         });
     },
-    
-    // openEditForm(food){
-    //   this.editFood = { ...food }
-    //   this.isEditFormVisible = true;
-    // },
-    // updateProduct(){
-    //   axios.put(`http://localhost:3000/products/edit/${this.editFood.foodId}`,this.editFood)
-    //   .then(()=>{
-    //     this.fetchProducts();
-    //     this.isEditFormVisible = false;
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    // },
-    // cancelEdit(){
-    //   this.isEditFormVisible = false;
-    //   this.editFood = {
-    //     foodId:'',
-    //     foodName:'',
-    //     description:'',
-    //     price: 0,
-    //     category:''
-    //   }
-    // },
     confirmDelete(foodId) {
       const confirmDelete = confirm('Are you sure you want to delete this product?');
       if (confirmDelete) {

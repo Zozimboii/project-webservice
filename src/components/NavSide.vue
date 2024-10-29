@@ -37,7 +37,7 @@
               <li>
                 <a href="#"
                   ><i class="bi bi-house-door"></i>
-                  <span class="text">Food</span>
+                  <span class="text">Home Page</span>
                 </a>
               </li>
             </router-link>
@@ -53,10 +53,20 @@
               <li class="active">
                 <a href="#"
                   ><i class="bi bi-cup-straw"></i>
-                  <span class="text">Food</span>
+                  <span class="text">Drink</span>
                 </a>
               </li>
             </router-link>
+            <div v-if="dutyId == 'admin'">
+              <router-link to="/manageproduct" class="rout">
+                <li class="active">
+                  <a href="#"
+                    ><i class="bi bi-cup-straw"></i>
+                    <span class="text">Manage Product</span>
+                  </a>
+                </li>
+              </router-link>
+            </div>
           </ul>
         </div>
         <!-- <div class="menu" ></div> -->

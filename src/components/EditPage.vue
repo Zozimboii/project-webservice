@@ -33,7 +33,7 @@
     <div class="edit-form2">
       <div class="edit-textbox">
       <div class="edit-textname" v-for="food in foods" :key="food.foodId">
-          <h5 class="t1">Edit food</h5>
+          <h5 class="t1">Edit food</h5>   
       </div>
     </div>
     <div class="edit-form2box">
@@ -62,12 +62,6 @@
           </div>
           <input type="text" v-model="editFood.category" />
         </div>
-        
-        
-
-
-
-
         <div class="edit-btn-form" v-for="food in foods" :key="food.foodId">
           <div class="edit-btn">
             <button class="edit-cancel" @click="cancelEdit">Cancel</button>
@@ -96,13 +90,12 @@
 
 <script>
 import axios from "axios";
-// import { EventBus } from "@/event-bus";
+
 export default {
   name: "EditPage",
   data() {
     return {
       foods: [],
-      
       showImg: false,
       editFood: {
         foodId: "",
@@ -110,7 +103,6 @@ export default {
         description: "",
         price: 0,
         category: "",
-        
         image: null,
         previewImage: null
       },
@@ -133,7 +125,6 @@ export default {
           console.log(err);
         });
     },
-  
     handleFileUpload(event) {
       const file = event.target.files[0];
       if (file) {
@@ -142,23 +133,32 @@ export default {
         this.showImg = true;
       }
     },
-    
     updateProduct() {
+      console.log("Edit Food Data: ", this.editFood);
       // test อยู่
       const formData = new FormData();
+      formData.append('foodId', this.editFood.foodId);
+      formData.append('foodName', this.editFood.foodName);
+      formData.append('description', this.editFood.description);
+      formData.append('price', this.editFood.price);
+      formData.append('category', this.editFood.category);
       if (this.editFood.image) {
         formData.append("image", this.editFood.image); 
       }
-      // 
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value); // ตรวจสอบค่าที่จะส่งไปยังเซิร์ฟเวอร์
+      }
+      // // 
       axios
         .put(
-          `http://localhost:3000/products/edit/${this.editFood.foodId}`,
-          this.editFood
-        )
+          `http://localhost:3000/products/edit/${this.editFood.foodId}`,formData,{
+            headers:{
+              'Content-Type': 'multipart/form-data'
+            }
+          })
         .then(() => {
           alert("Product updated successfully");
-          this.fetchProducts(this.editFood.foodId);
-          this.$router.push(`/manageproduct`);
+          this.$router.push('/manageproduct')
         })
         .catch((err) => {
           console.log(err);
@@ -178,4 +178,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
