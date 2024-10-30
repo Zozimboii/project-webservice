@@ -158,7 +158,9 @@ export default {
           })
         .then(() => {
           alert("Product updated successfully");
-          this.$router.push('/manageproduct')
+          this.$router.push('/manageproduct').then(() => {
+            window.location.reload();
+          })
         })
         .catch((err) => {
           console.log(err);

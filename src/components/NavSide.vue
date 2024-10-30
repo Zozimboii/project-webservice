@@ -2,22 +2,13 @@
   <div class="container">
     <div class="sidebar" v-show="showSide">
       <div class="head">
-        <!-- img user -->
-        <div class="user-img">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="44"
-            height="44"
-            fill="currentColor"
-            class="bi bi-person-circle"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path
-              fill-rule="evenodd"
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
-            />
-          </svg>
+        <div class="user-img" v-if="memEmail">
+          <div v-if="imageExists">
+            <img style="width:40px; height:40px; border-radius: 50%;" :src="`http://localhost:3000/img_mem/${memEmail}.jpg?timestamp=${new Date().getTime()}`">
+          </div>
+          <div v-else>
+            <img style="width:40px; height:40px; border-radius: 50%;" :src="`http://localhost:3000/img_mem/default.jpg`">
+          </div>
         </div>
         <div class="user-details" v-if="memName === null">
           <p class="title">Unknown</p>
@@ -41,7 +32,7 @@
                 </a>
               </li>
             </router-link>
-            <router-link to="/homepage" class="rout">
+            <router-link to="/showfoods" class="rout">
               <li>
                 <a href="#">
                   <i class="bi bi-egg-fill"></i>
@@ -49,7 +40,7 @@
                 </a>
               </li>
             </router-link>
-            <router-link to="/homepage" class="rout">
+            <router-link to="/showdrink" class="rout">
               <li class="active">
                 <a href="#"
                   ><i class="bi bi-cup-straw"></i>
@@ -154,12 +145,11 @@
           <div class="cart">
             <div class="cart-in">
               <ul>
-                <router-link to="/" class="rout">
+                <router-link to="/cartdetail" class="rout">
                   <li>
                     <a href="#"
                       ><i class="cart-img bi bi-cart2"></i
-                      ><span>Cart (0)</span></a
-                    >
+                      ><span>Cart ({{ cartCount }})</span></a>
                   </li>
                 </router-link>
               </ul>
@@ -167,16 +157,6 @@
               <div></div>
             </div>
           </div>
-
-          <!-- <div class="logo">
-              <div class="logo-img">
-                <div>
-                  <router-link to="/" class="rout">
-                  <a href="#"><img src="./assets/logo.jpg" alt=""></a>
-                </router-link>
-                </div>
-              </div>
-            </div> -->
         </div>
       </div>
 
@@ -195,22 +175,24 @@ export default {
   data() {
     return {
       showSide: true,
+      cartCount: 0,
+      memEmail: null,
       memName: null,
       backendMessage: null,
       dutyId: null,
+      imageExists:false,
     };
   },
   async mounted() {
     await this.chkSession();
     this.memName = sessionStorage.getItem("memName");
-    // test
     this.dutyId = sessionStorage.getItem("dutyId");
-// 
+    EventBus.on("cartUpdated",this.incrementCartCount)
     EventBus.on("loginok", () => {
-      this.memName = sessionStorage.getItem("memName");
-      // 
+      this.memName = sessionStorage.getItem("memName"); 
       this.dutyId = sessionStorage.getItem("dutyId");
-      // 
+      this.dutyId = sessionStorage.getItem("memEmail");
+      this.checkImage();
     });
     this.$router.afterEach(() => {
       this.showSide = false;
@@ -220,27 +202,49 @@ export default {
   beforeUnmount() {
     EventBus.off("loginok");
   },
-
+  beforeUnmountCart() {
+    EventBus.off("cartUpdated", this.incrementCartCount);
+  },
   methods: {
     toggleSideBar() {
       this.showSide = !this.showSide;
     },
-
-    async chkSession() {
-      await axios
-        .get(`http://localhost:3000/members/getss`)
-        .then((res) => {
-          console.log(res.data);
-          this.memEmail = res.data.email;
-          this.memName = res.data.name;
-          this.dutyId = res.data.duty;
-            
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    incrementCartCount(){
+      this.cartCount += 1;
     },
+    async chkSession() {
+        await axios
+          .get(`http://localhost:3000/members/getss`)
+          .then((res) => {
+            if (res.data.email) {
+              // ตั้งค่าเมื่อผู้ใช้ล็อกอินแล้ว
+              this.memEmail = res.data.email;
+              this.memName = res.data.name;
+              this.dutyId = res.data.duty;
+              this.checkImage(); // ตรวจสอบรูปภาพเมื่อผู้ใช้ล็อกอิน
+            } else {
+              // รีเซ็ตค่าหากยังไม่ได้ล็อกอิน
+              this.memEmail = null;
+              this.memName = null;
+              this.dutyId = null;
+              this.imageExists = false; // ซ่อนรูปภาพโปรไฟล์
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      },  
 
+    checkImage(){
+      const image = new Image();
+      image.src = `http://localhost:3000/img_mem/${this.memEmail}.jpg`;
+      image.onload = () => {
+        this.imageExists = true;
+      }
+      image.onerror = () => {
+        this.imageExists = false;
+      }
+    },
     async memlogout() {
       const cf = window.confirm("ต้องการออกจากระบบ?");
       EventBus.emit("memlogout");
@@ -253,7 +257,10 @@ export default {
           if (this.backendMessage == "success") {
             sessionStorage.clear();
             this.memName = null;
-            this.$router.push("/");
+            this.imageExists = false;
+            this.$router.push("/").then(()=>{
+              window.location.reload();
+            });
           }
         } catch (err) {
           console.log(err);

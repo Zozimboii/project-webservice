@@ -6,11 +6,13 @@ import TheSetting from "@/components/TheSetting.vue";
 import TheMain from "@/components/TheMain.vue";
 import TheRegister from "@/components/TheRegister.vue";
 import AdminPage from "@/components/AdminPage.vue";
-import UserPage from "@/components/UserPage.vue";
 import ManageProduct from "@/components/ManageProduct.vue";
 import EditPage from "@/components/EditPage.vue";
 import EditImg from "@/components/EditImg.vue";
-
+import ShowFoods from "@/components/ShowFoods.vue";
+import ShowDrink from "@/components/ShowDrink.vue";
+import CartDetail from "@/components/CartDetail.vue";
+import CartShow from "@/components/CartShow.vue";
 
 const routes = [
   {
@@ -45,11 +47,6 @@ const routes = [
     meta: { requiresAuth: true, role: 'admin'}
   },
   {
-    name:"User",
-    path:"/user",
-    component: UserPage,
-  },
-  {
     name:'ManageProduct',
     path:"/manageproduct",
     component: ManageProduct,
@@ -64,7 +61,27 @@ const routes = [
     name:"EditImg",
     path:"/edit/:id/img",
     component: EditImg,
-  }
+  },
+  {
+    name:"ShowFoods",
+    path:"/showfoods",
+    component: ShowFoods,
+  },
+  {
+    name:"ShowDrink",
+    path:"/showdrink",
+    component: ShowDrink,
+  },
+  {
+    name:"CartDetail",
+    path:"/cartdetail",
+    component: CartDetail,
+  },
+  {
+    path:'/CartShow/:cartId',
+    name:'CartShow',
+    component:CartShow
+  },
 ];
 
 const router = createRouter({

@@ -73,10 +73,11 @@
 
 }
 
-.setting-text2 .inside-text2 {
-  /* border: 1px solid rgb(0, 0, 0); */
-
-  /* width: 100%; */
+.setting-text2 .inside-text2 img {
+  width: 70px; /* ขนาดของรูปภาพ */
+  height: 70px;
+  object-fit: cover; /* ป้องกันการบิดเบี้ยวของรูป */
+  border-radius: 50%; /* รูปภาพวงกลม */
 }
 
 .setting-container h1,

@@ -211,7 +211,7 @@ body {
   height: 94vh;
   display: flex;
   /* padding: 20px; */
-  background-image: url(../background.png);
+  /* background-image: url(../background.png); */
   /* background-repeat: no-repeat; */
   background-position: center;
   /* background-attachment: fixed; */

@@ -63,11 +63,15 @@ export default {
           
           if(role === 'admin'){
             setTimeout(()=>{
-              this.$router.push('/manageproduct');
+              this.$router.push('/user').then(() => {
+                window.location.reload();
+              });
             },500)
           }else{
             setTimeout(() => {
-            this.$router.push('/homepage');
+            this.$router.push('/homepage').then(()=>{
+              window.location.reload();
+            });
           },500)
           }
         }

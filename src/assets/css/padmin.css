@@ -6,6 +6,11 @@
     /* margin: 10px 10px 0 10px; */
 }
 
+.showfd{
+    width: 100%;
+    background-color: rgb(199, 253, 235);
+}
+
 .text-product {
     /* border: 1px solid black; */
     text-align: center;
