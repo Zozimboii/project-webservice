@@ -9,4 +9,7 @@ import './assets/css/AUPage.css'
 import './assets/css/addadmin.css'
 import './assets/css/setting.css'
 import './assets/css/edit.css'
+import './assets/css/food.css'
+import './assets/css/firstpage.css'
+import './assets/css/showcart.css'
 createApp(App).use(router).mount('#app')

@@ -12,28 +12,26 @@
           <div class="inside-text2"  v-else >
             <img :src="`http://localhost:3000/img_mem/default.jpg`" :alt="memEmail">
           </div>
+          
         </div>
-        <form @submit.prevent="uploadFile">
-          <div class="row g-3 mt-3">
-              <div class="col-md-6 col-sm-12 "></div>
-              <div class="col-auto">
-                  <input class="form-control" type="file" id="formFile" @change="onFileChange" required />
+        
+        <div class="setting-text3">
+          <p></p>
+          <div class="inside-text3">
+            <form @submit.prevent="uploadFile">
+          <div class="file-img">
+            
+              <div class="file-choose">
+                  <input type="file" id="formFile" @change="onFileChange" required />
               </div>
-              <div class="col-auto">
-                  <button class="btn btn-primary" type="submit">Upload</button>
+              <div class="file-upload">
+                  <button type="submit">Upload</button>
               </div>
           </div>
-          <div class="row g-3 mt-3">
-              <div class="col-md-6 col-sm-12 ">
-              </div>
-              <div class="col-auto">
-                  <div class="alert alert-success" v-if="fileMessage != 'fail' && fileMessage != null">
-                  {{ fileMessage }}
-                  </div>
-              </div>
-              <div class="col-auto"></div>
-          </div>
+         
       </form>
+          </div>
+        </div>
         <div class="setting-text2">
           <p>Username</p>
           <div class="inside-text2">
@@ -56,31 +54,36 @@
       <div class="cart-finished">
         <div class="setting-cart">
           <h1>Cart</h1>
-          <table class="table">
-            <tr class="bg-secondary bg-opacity-10" style="height: 30px;">
-                <td></td>
-                <td>เลขที่</td>
-                <td>วันที่</td>
-                <td class="text-center">จำนวน</td>
-                <td class="text-end">ยอดเงิน</td>
-                <td></td>
-            </tr>
-            <tr v-for="(ct, cartId) in cart" :key="cartId" style="height: 30px;" >
-                <td>{{ ct.row_number }}</td>
-                <td><span class="text-primary">
+          <div class="table">
+            <div class="table-top">
+            <div class="setting-tr1">
+                <div class="setting-td0"></div>
+                <div class="setting-td1">เลขที่</div>
+                <div class="setting-td2">วันที่</div>
+                <div class="setting-td3">จำนวน</div>
+                <div class="setting-td4">ยอดเงิน</div>
+                <div class="setting-td0"></div>
+            </div>
+          </div>
+          <div class="table-down">
+            <div v-for="(ct, cartId) in cart" :key="cartId" class="setting-tr2">
+                <div class="setting-td0">{{ ct.row_number }}</div>
+                <div class="setting-td6">
+                  <div class="setting-cartid">
                         <router-link :to="`/cartshow/${ct.cartId }`" style="text-decoration: none;">
                             {{ ct.cartId }}
                         </router-link>
-                    </span>
-                </td>
-                <td>{{ formattedDate(ct.cartDate) }}</td>
-                <td class="text-center">{{ ct.sqty }}</td>
-                <td class="text-end">{{ ct.sprice.toLocaleString()}}</td>
-                <td class="text-center">
+                    </div>
+                </div>
+                <div class="setting-td7">{{ formattedDate(ct.cartDate) }}</div>
+                <div class="setting-td8">{{ ct.sqty }}</div>
+                <div class="setting-td9">{{ ct.sprice.toLocaleString()}}</div>
+                <div class="setting-td0">
                     <i class="bi-x-lg text-danger"></i>
-                </td>
-            </tr>
-        </table>    
+                </div>
+            </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>

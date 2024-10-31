@@ -160,7 +160,7 @@
         </div>
       </div>
 
-      <div class="data-main">
+      <div class="data-main ">
         <router-view></router-view>
       </div>
     </div>

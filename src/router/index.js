@@ -13,8 +13,11 @@ import ShowFoods from "@/components/ShowFoods.vue";
 import ShowDrink from "@/components/ShowDrink.vue";
 import CartDetail from "@/components/CartDetail.vue";
 import CartShow from "@/components/CartShow.vue";
+import MainHome from "@/components/MainHome.vue";
+import PopularMenu from "@/components/PopularMenu.vue";
 
 const routes = [
+
   {
     name: "Main",
     path: "/",
@@ -82,6 +85,16 @@ const routes = [
     name:'CartShow',
     component:CartShow
   },
+  {
+    path:'/main',
+    name:'MainHome',
+    component:MainHome
+  },
+  {
+    path: '/popular-menu',
+    name: 'PopularMenu',
+    component: PopularMenu
+}
 ];
 
 const router = createRouter({
