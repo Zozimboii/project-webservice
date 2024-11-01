@@ -4,7 +4,7 @@
     <!---v for  -->
 
     <!-- Detail -->
-    <div class="table">
+    <div class="table" >
       <div class="cartshow-tr1">
         <div class="cartshow-td00"></div>
         <div class="cartshow-td11">สินค้า</div>
@@ -15,17 +15,13 @@
         <!-- <div class="cartshow-td00"></div> -->
       </div>
       <div v-for="(ctd, foodId) in cartDtl" :key="foodId" class="cartshow-tr2">
-        <div class="cartshow-td00">{{ ctd.row_number }}</div>
-        <!-- <div class="cartshow-td66">{{ ctd.foodId }}</div> -->
-        <div class="cartshow-td77">{{ ctd.foodName }}</div>
-        <div class="cartshow-td88">{{ ctd.price }}</div>
-        <div class="cartshow-td99">{{ ctd.qty }}</div>
-        <div class="cartshow-td100">
+        <div class="cartshow-td00" v-if="ctd.qty>0">{{ ctd.row_number }}</div>
+        <div class="cartshow-td77" v-if="ctd.qty>0">{{ ctd.foodName }}</div>
+        <div class="cartshow-td88" v-if="ctd.qty>0">{{ ctd.price }}</div>
+        <div class="cartshow-td99" v-if="ctd.qty>0">{{ ctd.qty }}</div>
+        <div class="cartshow-td100" v-if="ctd.qty>0">
           {{ (ctd.price * ctd.qty).toLocaleString() }}
         </div>
-        <!-- <td class="text-center">
-                    <i class="bi-x-lg text-danger"></i>
-                </td> -->
       </div>
     </div>
     <div v-for="(ct, cartId) in cart" :key="cartId" class="cartshow-header">
@@ -46,10 +42,10 @@
     </div>
   </div>
     <div class="cartshow-cf-del">
-      <div onclick="return confirm('ยืนยันลบตะกร้า')" class="cartshow-del">
+      <div @click="deleteCart" class="cartshow-del">
         <i class="bi-cart-x-fill"></i> ลบตะกร้าสินค้า
       </div>
-      <div onclick="return confirm('ยืนยันสั่งสินค้า')" class="cartshow-cf">
+      <div @click="confirmOrder" class="cartshow-cf">
         <i class="bi-currency-dollar"></i> ยืนยันสั่งสินค้า
       </div>
     </div>
@@ -67,31 +63,29 @@ export default {
   name: "CartShow",
   data() {
     return {
-      cart: [], //รับข้อมูล Master
-      cartDtl: [], //รับข้อมูล Detail
+      cart: [],
+      cartDtl: [], 
       cartId: null,
       memEmail: null,
       cusId: null,
     };
   },
   async mounted() {
-    // ตรวจสอบว่าเป็นเจ้าของตะกร้าหรือไม่
     await this.chkSession();
     this.cartId = this.$route.params.cartId;
-    // อ่านข้อมูล Master +อ่านข้อมูล Detail
-    await this.getCart();
-    await this.getCartDtl();
+    if(this.cartId){
+      await this.getCart();
+      await this.getCartDtl();
+    }
   },
   methods: {
-    // แปลงรูปแบบวันที่
     formattedDate(dateStr) {
       const date = new Date(dateStr);
       const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0"); // เดือนเริ่มต้นที่ 0, จึงต้อง +1
+      const month = String(date.getMonth() + 1).padStart(2, "0"); 
       const day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
     },
-    // Master
     async getCart() {
       console.log("Get Cart");
       await axios
@@ -105,7 +99,6 @@ export default {
           console.error(err);
         });
     },
-    // Detail
     async getCartDtl() {
       console.log("Get CartCartDtl");
       await axios
@@ -118,7 +111,6 @@ export default {
           console.error(err);
         });
     },
-    // ตรวจสอบ Session
     async chkSession() {
       await axios
         .get(`http://localhost:3000/members/getss`)
@@ -128,8 +120,62 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-        });
+      });
     },
+    async confirmOrder(){
+      const confirm = window.confirm("ยืนยันการสั่ง");
+      if(confirm){
+        try{
+          const response = await axios.post(`http://localhost:3000/carts/confirmOrder`,{
+            cartId:this.cartId,
+            cartCf: true
+          })
+          if(response.data.success){
+            alert("ยืนยันคำสั่งซื้อ")
+            this.cartDtl = [];
+            this.cart = [];
+            this.cartId = null;
+
+            sessionStorage.removeItem('cartId');
+
+            const newCartResponse = await axios.post(`http://localhost:3000/carts/create`,{
+              cusId:this.cusId
+            })
+            if(newCartResponse.data.cartOK){
+              this.cartId = newCartResponse.data.messageAddCart;
+              this.cartDtl = [];
+            }else{
+              alert("สร้างตะกร้าผิดพลาด")
+            }
+          }else{
+            alert("เกิดข้อผิดพลาดในการยืนยัน")
+          }
+        }catch(error){
+          console.error(error);
+          alert("เกิดข้อผิดพลาดในการยืนยัน")
+        }
+      }
+      this.$router.push('/homepage');
+    },
+    async deleteCart(){
+      const confirmDelete = window.confirm("ยืนยันลบตะกร้า");
+      if(confirmDelete){
+        try{
+          const response = await axios.delete(`http://localhost:3000/carts/delete/${this.cartId}`);
+          if (response.data.success){
+            alert("ลบเรียบร้อยแล้ว")
+            this.cart = [];
+            this.cartDtl = [];
+          }else{
+            alert("เกิดข้อพลาดในการลบ")
+          }
+        }catch(error){
+          console.error(error);
+          alert("เกิดข้อพลาดในการลบ")
+        }
+      }
+      this.$router.push('/setting');
+    }
   },
 };
 </script>

@@ -36,39 +36,32 @@
         <div class="cart-text">
             Cart
         </div>
-        <div class="cart-big-box" v-for="(fd, foodId) in foods" :key="foodId">
-            <div class="cart-mid-box">
-                <div class="cart-cancel">
-                    
-                    <i class="bi bi-x-lg"></i>
-                </div>
+        <div class="cart-big-box" v-for="(ctd, foodId) in cartDtl" :key="foodId">
+            <div class="cart-mid-box" v-if="ctd.qty>0">
                 <div class="cart-sm-box">
                     <div class="cart-show-name">
-                        <h5 class="cart-card-name">{{ fd.foodName }}</h5>
+                        <h5 class="cart-card-name">{{ ctd.foodName }}</h5>
 
                     </div>
                     <div class="cart-show-price">
-                        <h5 class="cart-card-price">จำนวน X {{ fd.price }}</h5>
+                        <h5 class="cart-card-price"><input type="number" class="qty-input" v-model="ctd.qty" @change="updateQuantity(ctd)" min="0" /> X {{ ctd.price }} = {{ (ctd.price * ctd.qty).toLocaleString() }}</h5>
                     </div>
                 </div>
                 <div class="cart-img">
 
-                    <img :src="`http://localhost:3000/img_fd/${fd.foodId}.jpg`" class="cart-img-in"  alt="">
+                    <img :src="`http://localhost:3000/img_fd/${ctd.pdId}.jpg`" class="cart-img-in"  alt="">
                 </div>
             </div>
         </div>
         <div class="cart-sum-btn">
             <div class="text-sum">
-                ราคาทั้งหมด
+                ราคาทั้งหมด {{ calculateTotalPrice().toLocaleString() }} Baht
             </div>
             <div class="sum-pay-watch-btn">
-
-                <div class="sum-watch-btn">
-    
-                    <a>ดูตระกร้า <i class="bi bi-arrow-right"></i></a>
-                </div>
                 <div class="sum-pay-btn">
-                <a>จ่ายเลย <i class="bi bi-arrow-right"></i></a>
+                    <button v-if="cartDtl.some(ctd => ctd.qty > 0)" @click="$router.push(`/cartshow/${cartId}`)">
+                        <a>จ่ายเลย <i class="bi bi-arrow-right"></i></a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -83,10 +76,19 @@ export default {
     data(){
         return{
             foods: [],
-            stext:''
+            stext:'',
+            cartDtl: [],
+            cartId:null,
         }
     },
     mounted(){
+        const savedCartId = sessionStorage.getItem('cartId');
+        if (savedCartId) {
+            this.cartId = savedCartId;
+        }
+        if (this.cartId) {
+            this.getCartDtl();
+        }
         axios.get(`http://localhost:3000/getdrink`)
         .then(res=>{
             this.foods = res.data;
@@ -96,8 +98,21 @@ export default {
         })
     },
     methods:{
+    async getCart() {
+      console.log("Get Cart");
+      await axios
+        .get(`http://localhost:3000/carts/getcart/${this.cartId}`)
+        .then((res) => {
+          console.log("Cart \n" + res.data);
+          this.cart = res.data;
+          this.cusId = res.data[0].cusId;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
         searchProduct(){
-            axios.get(`http://localhost:3000/products/search/${this.stext}`)
+            axios.get(`http://localhost:3000/products/searchdrk/${this.stext}`)
             .then(res=>{
                 console.log(this.stext);
                 this.foods = res.data;
@@ -120,8 +135,8 @@ export default {
         if (this.cartId == null) {
             await this.addCart(); // ถ้ายังไม่มีให้สร้างตะกร้า
         }
-
-        await this.addCartDtl(foodId, foodPrice); // ถ้ามีตะกร้าแล้วให้เอาสินค้าใส่ตะกร้า
+        await this.addCartDtl(foodId, foodPrice);
+        this.getCartDtl();
         EventBus.emit("cartUpdated"); // แจ้งว่าอัปเดตตะกร้า
     },
     async addCart() {
@@ -137,6 +152,7 @@ export default {
         } catch (err) {
             console.log(err);
         }
+        sessionStorage.setItem('cartId', this.cartId);
     },
     async addCartDtl(foodId, foodPrice) {
         console.log("addCartDtl");
@@ -190,6 +206,41 @@ export default {
                     console.error(err);
                 });
         },
+        async getCartDtl() {
+            console.log("Get CartCartDtl");
+            await axios
+                .get(`http://localhost:3000/carts/getcartdtl/${this.cartId}`)
+                .then((res) => {
+                console.log("CartDtl \n" + res.data);
+                this.cartDtl = res.data;
+                })
+                .catch((err) => {
+                console.error(err);
+            });
+        },
+        async updateQuantity(ctd) {
+        // อัปเดตจำนวนสินค้าในตะกร้า
+        let updatedCartDetail = {
+            cartId: this.cartId,
+            pdId: ctd.pdId,
+            newQty: ctd.qty
+        };
+        try {
+            const response = await axios.post(`http://localhost:3000/carts/updatecartdtl`, updatedCartDetail);
+            console.log(response.data);
+            this.getCartDtl(); // รีเฟรชตะกร้า
+        } catch (err) {
+            console.error(err);
+        }
+        EventBus.emit("cartUpdated");
+        },
+        calculateTotalPrice(){
+            let total = 0;
+            this.cartDtl.forEach(ctd => {
+                total += ctd.price * ctd.qty;
+            });
+            return total;
+        }
     }
 }
 </script>

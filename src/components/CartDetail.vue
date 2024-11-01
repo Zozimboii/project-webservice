@@ -1,6 +1,6 @@
 <template>
     <div v-if="cartId != null" >
-        <button  class="btn btn-success text-white" @click="$router.push(`/cartshow/${cartId}`)">
+        <button  class="btn btn-success text-white" style="padding: 5px 5px; font-size: 9px; border-radius: 5px;" @click="$router.push(`/cartshow/${cartId}`)">
             {{cartId}} [{{ qty }}] - {{ money }}฿
         </button>
     </div>
@@ -22,7 +22,7 @@ export default {
     },
     async mounted() {
         await this.sumCart()
-        EventBus.on('cartdtlOK', () => {
+        EventBus.on('cartUpdated', () => {
             this.sumCart()
         })
         EventBus.on('memlogout', () => {

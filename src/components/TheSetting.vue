@@ -62,7 +62,7 @@
                 <div class="setting-td2">วันที่</div>
                 <div class="setting-td3">จำนวน</div>
                 <div class="setting-td4">ยอดเงิน</div>
-                <div class="setting-td0"></div>
+                <div class="setting-td4">สถานะ</div>
             </div>
           </div>
           <div class="table-down">
@@ -77,10 +77,8 @@
                 </div>
                 <div class="setting-td7">{{ formattedDate(ct.cartDate) }}</div>
                 <div class="setting-td8">{{ ct.sqty }}</div>
-                <div class="setting-td9">{{ ct.sprice.toLocaleString()}}</div>
-                <div class="setting-td0">
-                    <i class="bi-x-lg text-danger"></i>
-                </div>
+                <div class="setting-td9">{{ ct.sprice}}</div>
+                <div class="setting-td9">{{ ct.cartCf ? 'Confirmed' : 'Pending' }}</div>
             </div>
         </div>
       </div>

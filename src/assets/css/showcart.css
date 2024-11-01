@@ -171,3 +171,11 @@
         cursor: pointer;
     }
 }
+.qty-input {
+    width: 50px; /* กำหนดความกว้างของช่องอินพุต */
+    height: 30px; /* กำหนดความสูงของช่องอินพุต */
+    font-size: 14px; /* ขนาดตัวอักษร */
+    padding: 2px; /* ขอบในของช่องอินพุต */
+    border: 1px solid #ccc; /* สีของกรอบ */
+    border-radius: 4px; /* มุมโค้งของกรอบ */
+}

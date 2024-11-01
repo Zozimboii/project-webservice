@@ -145,13 +145,9 @@
           <div class="cart">
             <div class="cart-in">
               <ul>
-                <router-link to="/cartdetail" class="rout">
                   <li>
-                    <a href="#"
-                      ><i class="cart-img bi bi-cart2"></i
-                      ><span>Cart ({{ cartCount }})</span></a>
+                      <CartDetail/>
                   </li>
-                </router-link>
               </ul>
 
               <div></div>
@@ -170,8 +166,13 @@
   <script>
 import axios from "axios";
 import { EventBus } from "@/event-bus";
+import CartDetail from "./CartDetail.vue"
 axios.defaults.withCredentials = true;
 export default {
+  name:'NavSide',
+  components:{
+    CartDetail
+  },
   data() {
     return {
       showSide: true,
@@ -181,6 +182,7 @@ export default {
       backendMessage: null,
       dutyId: null,
       imageExists:false,
+      cartId:null,
     };
   },
   async mounted() {
@@ -206,6 +208,19 @@ export default {
     EventBus.off("cartUpdated", this.incrementCartCount);
   },
   methods: {
+    async getCart() {
+      console.log("Get Cart");
+      await axios
+        .get(`http://localhost:3000/carts/getcart/${this.cartId}`)
+        .then((res) => {
+          console.log("Cart \n" + res.data);
+          this.cart = res.data;
+          this.cusId = res.data[0].cusId;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
     toggleSideBar() {
       this.showSide = !this.showSide;
     },
