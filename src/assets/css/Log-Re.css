@@ -5,8 +5,11 @@
     align-items: center;
     justify-content: center; */
     padding: 20px 20px 80px 20px;
+    background-color:#aeb9be;
     /* border: 2px solid white; */
-    
+    /* background-image: url("../background.png");
+    background-position: center;
+    background-size: cover; */
 }
 
 .register-container form{
@@ -116,6 +119,17 @@
     align-items: center; */
 
 }
+.register-user-container form .inside-box p{
+   
+    margin-bottom: 0px;
+    /* box-sizing: border-box; */
+    /* width: 50%;  */
+    /* height: 100px
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+}
 
 /* ---user-register--- */
 
@@ -126,6 +140,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px 20px 80px 20px;
+    background-color: #aeb9be;
     /* border: 2px solid white; */
 }
 .register-user-container form{
@@ -194,4 +209,31 @@
 .register-user-container form p a{
    
     color: #EE1C43;
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1440px){
+   
+    
+.box-warn {
+    margin-top: 170px;
+    
+    padding-bottom: 50px;
+}
+.register-container form{
+    padding: 20px;
+    
+    width: 40%;
+    margin-bottom: 30px;
+}
+
+.register-user-container form{
+    
+ 
+    width: 45%;
+    
+}
+.register-user-container{
+   
+    padding-top: 80px;
+}
 }

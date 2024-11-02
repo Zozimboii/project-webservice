@@ -155,7 +155,7 @@ export default {
           alert("เกิดข้อผิดพลาดในการยืนยัน")
         }
       }
-      this.$router.push('/homepage');
+      this.$router.push('/');
     },
     async deleteCart(){
       const confirmDelete = window.confirm("ยืนยันลบตะกร้า");

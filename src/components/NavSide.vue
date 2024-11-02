@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="nav-main">
     <div class="sidebar" v-show="showSide">
       <div class="head">
         <div class="user-img" v-if="memEmail">
@@ -10,9 +11,8 @@
             <img style="width:40px; height:40px; border-radius: 50%;" :src="`http://localhost:3000/img_mem/default.jpg`">
           </div>
         </div>
-        <div class="user-details" v-if="memName === null">
-          <p class="title">Unknown</p>
-          <p class="name">Unknown</p>
+        <div class="user-details1" v-if="memName === null">
+          <i class="bi bi-person-circle"></i>
         </div>
         <div class="user-details" v-else>
           <p class="title">{{ dutyId }}</p>
@@ -24,11 +24,11 @@
           <p class="title">Main</p>
 
           <ul>
-            <router-link to="/homepage" class="rout">
+            <router-link to="/main" class="rout">
               <li>
                 <a href="#"
-                  ><i class="bi bi-house-door"></i>
-                  <span class="text">Home Page</span>
+                  ><i class="bi bi-cup-hot-fill"></i>
+                  <span class="text">See Popular Menu</span>
                 </a>
               </li>
             </router-link>
@@ -110,7 +110,8 @@
         </div>
       </div>
     </div>
-    <div class="nav-top">
+  </div>
+    <div class="nav-top" :class="{ 'sidebar-visible': showSide }">
       <div class="inside-top">
         <!-- icon-list-menu -->
         <div class="toggle-menu" @click="toggleSideBar">
@@ -142,17 +143,20 @@
           </div>
           <!-- logo -->
 
-          <div class="cart">
-            <div class="cart-in">
-              <ul>
+          <!-- <div class="cart">
+            <div class="cart-in"> -->
+              <!-- <ul>
                   <li>
                       <CartDetail/>
                   </li>
-              </ul>
-
+              </ul> -->
+<!-- 
               <div></div>
             </div>
-          </div>
+          </div> -->
+        </div>
+        <div class="toggle-menu">
+          
         </div>
       </div>
 
@@ -166,12 +170,12 @@
   <script>
 import axios from "axios";
 import { EventBus } from "@/event-bus";
-import CartDetail from "./CartDetail.vue"
+// import CartDetail from "./CartDetail.vue"
 axios.defaults.withCredentials = true;
 export default {
   name:'NavSide',
   components:{
-    CartDetail
+    // CartDetail
   },
   data() {
     return {

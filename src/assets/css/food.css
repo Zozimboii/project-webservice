@@ -1,6 +1,9 @@
 .food-container {
     /* border: 1px solid black; */
+    min-height: fit-content;
     width: 80%;
+   
+  
     
 }
 
@@ -94,6 +97,25 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 40px;
+        .in-btn{
+            /* border: 8px solid rgb(131, 71, 43); */
+            width: 13%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span{
+                color: #54778d;
+                font-size: 16px;
+            }
+            .food-add{
+                border-radius: 10px;
+                border: 4px solid rgb(0, 0, 0);
+                padding: 5px 10px;
+                background-color: #000000;
+                color: white;
+                
+            }
+        }
     }
 
     .in-text{
@@ -128,10 +150,12 @@
 
 
 .food-cart {
-    /* border: 2px solid rgb(52, 43, 131); */
+    border: 2px solid rgb(52, 43, 131);
     width: 20%;
     padding: 20px;
-    margin-right: 40px;
+    margin:10px ;
+    border-radius: 50px;
+    min-height: fit-content;
     .cart-text{
         /* border: 2px solid rgb(50, 131, 43); */
         /* border-bottom: 1px solid #ebeaea; */
@@ -146,6 +170,30 @@
     }
 
      
+}
+.cart-show-pay2{
+    /* border: 2px solid rgb(50, 131, 43); */
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    .basket{
+        /* border: 2px solid rgb(56, 43, 131); */
+        
+        i{
+            font-size: 100px;
+            color: #8b7676;
+        }
+        
+    }
+    .basket-text{
+        /* border: 2px solid rgb(56, 43, 131); */
+        span{
+            font-size: 24px;
+            color: #8b7676;
+        }
+    }
 }
 
 
@@ -248,13 +296,14 @@
         /* padding-bottom: 40px; */
     }
     .sum-pay-watch-btn{
-        width: 100%;
+        width: 80%;
        margin-top: 20px;
         
        .sum-pay-btn{
         margin-top: 10px;
         background-color: #000000;
-        border: 2px solid #000000;
+        /* border: 2px solid #a31414; */
+        border-radius: 20px;
         color: white;
 
        }
@@ -271,5 +320,57 @@
             align-items: center;
             cursor: pointer;
         }
+    }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1440px){
+    .food-card {
+        .in-title{
+            .in-btn{
+
+                width: 25%;
+            }
+        }
+    }
+    .cart-big-box{
+        .cart-mid-box{
+            .cart-img{
+              
+                border-radius: 20px;
+                min-height: fit-content;
+                .cart-img-in{
+                    width: 60px;
+                    height: px;
+                    border-radius: 17px;
+                }
+            }
+            .cart-sm-box{
+                
+                .cart-show-price ,.cart-show-name{
+                  
+                    
+    
+    
+                    .cart-card-price,.cart-card-name{
+                        margin: 0;
+                        padding: 0;
+                        font-size: 14px;
+                        .qty-input {
+                            width: 40px; /* กำหนดความกว้างของช่องอินพุต */
+                            height: 30px; /* กำหนดความสูงของช่องอินพุต */
+                            font-size: 14px; /* ขนาดตัวอักษร */
+                            padding: 5px; /* ขอบในของช่องอินพุต */
+                        
+                            border-radius: 4px; /* มุมโค้งของกรอบ */
+                        }
+                    }
+                }
+    
+                
+            }
+            
+        }
+    
+        
     }
 }

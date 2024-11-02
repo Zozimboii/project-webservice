@@ -62,12 +62,12 @@
                 <div class="setting-td2">วันที่</div>
                 <div class="setting-td3">จำนวน</div>
                 <div class="setting-td4">ยอดเงิน</div>
-                <div class="setting-td4">สถานะ</div>
+                <div class="setting-td5">สถานะ</div>
             </div>
           </div>
           <div class="table-down">
             <div v-for="(ct, cartId) in cart" :key="cartId" class="setting-tr2">
-                <div class="setting-td0">{{ ct.row_number }}</div>
+                <div class="setting-td0"><div class="t0">{{ ct.row_number }}</div></div>
                 <div class="setting-td6">
                   <div class="setting-cartid">
                         <router-link :to="`/cartshow/${ct.cartId }`" style="text-decoration: none;">
@@ -75,10 +75,10 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="setting-td7">{{ formattedDate(ct.cartDate) }}</div>
-                <div class="setting-td8">{{ ct.sqty }}</div>
-                <div class="setting-td9">{{ ct.sprice}}</div>
-                <div class="setting-td9">{{ ct.cartCf ? 'Confirmed' : 'Pending' }}</div>
+                <div class="setting-td7"><div class="t1">{{ formattedDate(ct.cartDate) }}</div></div>
+                <div class="setting-td8"><div class="t2">{{ ct.sqty }}</div></div>
+                <div class="setting-td9"><div class="t3">{{ ct.sprice}}</div></div>
+                <div class="setting-td11"><div class="t4">{{ ct.cartCf ? 'Confirmed' : 'Pending' }}</div></div>
             </div>
         </div>
       </div>
@@ -174,6 +174,11 @@ export default {
             },
           }
         );
+        setTimeout(() => {
+            this.$router.push('/setting').then(()=>{
+              window.location.reload();
+            });
+          },500)
         this.fileMessage = response.data.message;
         this.checkImage();
         this.imageTimestamp = Date.now();

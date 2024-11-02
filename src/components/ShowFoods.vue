@@ -16,8 +16,11 @@
                         <div class="in-title">
                             <h5 class="food-card-title">{{ fd.foodName }}</h5>
                             <div class="in-btn">
-                                {{ fd.price }} Baht
-                                <button class="btn btn-primary" @click="addToCart(fd.foodId, fd.price)">Add to cart</button>
+                               <span>
+                                
+                                   {{ fd.price }} Baht
+                               </span> 
+                                <button class="food-add" @click="addToCart(fd.foodId, fd.price)"><i class="bi bi-plus"></i></button>
                             </div>
                         </div>
                         <div class="in-text">
@@ -26,12 +29,22 @@
                     </div>
                 </div>
             </div>
-        </div>
+         </div>
         <div class="food-cart" >
             <div class="cart-text">
                 Cart
             </div>
-            <div class="cart-big-box" v-for="(ctd, foodId) in cartDtl" :key="foodId">
+            <div class="cart-show-pay2"  v-if="cartId=== null">
+            <div class="basket">
+                <i class="bi bi-basket-fill"></i>
+            </div>
+            <div class="basket-text">
+
+                <span>ตะกร้าสินค้าว่าง</span>
+            </div>
+        </div>
+        <div class="cart-show-pay" v-else>
+            <div class="cart-big-box" v-for="(ctd, foodId) in cartDtl" :key="foodId" >
                 <div class="cart-mid-box" v-if="ctd.qty>0">
                     <div class="cart-sm-box" >
                         <div class="cart-show-name">
@@ -52,14 +65,15 @@
                 <div class="text-sum">
                     ราคาทั้งหมด {{ calculateTotalPrice().toLocaleString() }} Baht
                 </div>
-                <div class="sum-pay-watch-btn" >
+                <div class="sum-pay-watch-btn">
                     <div class="sum-pay-btn">
-                    <button v-if="cartDtl.some(ctd => ctd.qty > 0)" @click="$router.push(`/cartshow/${cartId}`)">
+                    <div v-if="cartDtl.some(ctd => ctd.qty > 0)" @click="$router.push(`/cartshow/${cartId}`)">
                         <a>จ่ายเลย <i class="bi bi-arrow-right"></i></a>
-                    </button>
+                    </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </template>
 
