@@ -20,7 +20,7 @@
         <div class="cartshow-td88" v-if="ctd.qty>0">{{ ctd.price }}</div>
         <div class="cartshow-td99" v-if="ctd.qty>0">{{ ctd.qty }}</div>
         <div class="cartshow-td100" v-if="ctd.qty>0">
-          {{ (ctd.price * ctd.qty).toLocaleString() }}
+          {{ (ctd.price * ctd.qty) }}
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
           <div class="cartshow-qty">จำนวนสินค้า {{ ct.sqty }}ชิ้น</div>
 
           <div class="cartshow-price">
-            ยอดเงิน {{ ct.sprice.toLocaleString() }} บาท
+            ยอดเงิน {{ ct.sprice }} บาท
           </div>
         </div>
       </div>
@@ -44,6 +44,9 @@
     <div class="cartshow-cf-del">
       <div @click="deleteCart" class="cartshow-del">
         <i class="bi-cart-x-fill"></i> ลบตะกร้าสินค้า
+      </div>
+      <div @click="createNewCart" class="cartshow-create">
+        <i class="bi-cart-plus-fill"></i> สร้างตะกร้าใหม่
       </div>
       <div @click="confirmOrder" class="cartshow-cf">
         <i class="bi-currency-dollar"></i> ยืนยันสั่งสินค้า
@@ -157,6 +160,31 @@ export default {
       }
       this.$router.push('/');
     },
+    async createNewCart() {
+        try {
+          this.cart = [];
+          this.cartDtl = [];
+          this.cartId = null;
+          sessionStorage.removeItem('cartId');
+          const response = await axios.post(`http://localhost:3000/carts/create`, {
+            cusId: this.cusId
+          });
+          if (response.data.cartOK) {
+            this.cartId = response.data.messageAddCart;
+            sessionStorage.setItem('cartId', this.cartId);
+            await this.getCart();
+            await this.getCartDtl();
+            alert("สร้างตะกร้าใหม่เรียบร้อยแล้ว");
+          } else {
+            alert("สร้างตะกร้าผิดพลาด");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("เกิดข้อผิดพลาดในการสร้างตะกร้าใหม่");
+        }
+        this.$router.push('/showfoods');
+      },
+
     async deleteCart(){
       const confirmDelete = window.confirm("ยืนยันลบตะกร้า");
       if(confirmDelete){
@@ -166,6 +194,8 @@ export default {
             alert("ลบเรียบร้อยแล้ว")
             this.cart = [];
             this.cartDtl = [];
+            this.cartId = null;
+            sessionStorage.removeItem('cartId');
           }else{
             alert("เกิดข้อพลาดในการลบ")
           }

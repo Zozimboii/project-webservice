@@ -171,6 +171,16 @@
         border-bottom-left-radius: 50px;
         cursor: pointer;
     }
+    .cartshow-create{
+        padding: 20px;
+        background-color: rgb(164, 164, 0);
+        font-size: 20px;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        cursor: pointer;
+    }
 }
 .qty-input {
     width: 50px; /* กำหนดความกว้างของช่องอินพุต */

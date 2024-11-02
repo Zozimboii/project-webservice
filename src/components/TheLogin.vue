@@ -36,8 +36,6 @@ export default {
       loginname:null,
       password:null,
       backendMessage:null,
-
-
     }
   },
   async mounted(){
