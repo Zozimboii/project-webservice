@@ -2,6 +2,12 @@
   
   <div class="admin-container">
     <h5 class="text-product">Product List</h5>
+    <div class="">
+      <h5 class="inputsrc">Search Product</h5>
+      <input type="text" v-model="stext" class="inputsrc">
+      <button class="food-btn" @click="searchProduct()"><i class="sear bi bi-search"></i></button>
+    </div>
+    
     <div class="add-btn">
     <router-link to="/admin">
       <button class="admin-btn">Add product</button>
@@ -67,6 +73,7 @@ export default {
     return {
       foods: [],
       isEditFormVisible: false,
+      stext:'',
       editFood:{
         foodId:'',
         foodName:'',
@@ -103,11 +110,26 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    searchProduct(){
+      axios.get(`http://localhost:3000/products/searchadmin/${this.stext}`)
+      .then(res=>{
+        console.log(this.stext)
+        this.foods = res.data;
+        this.stext = '';
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  
     } 
   }
 };
 </script>
 
 <style>
-
+  .inputsrc{
+    width: 150px;
+    margin-left: 50px;
+  }
 </style>
